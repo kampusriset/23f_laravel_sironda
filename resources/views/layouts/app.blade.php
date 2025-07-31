@@ -9,6 +9,8 @@
 </head>
 <body>
     @include('components.navbar')
-    @yield('content')
+    <main>
+        @yield('content')
+    </main>
 </body>
 </html>
