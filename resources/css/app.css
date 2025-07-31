@@ -3,10 +3,16 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+main {
+    width: 100%;
+}
+
 .navbar-brand {
     display: flex;
     align-items: center;
 }
+
 a:link {
     text-decoration: inherit;
     color: inherit;
@@ -16,13 +22,8 @@ a:visited {
     text-decoration: inherit;
     color: inherit;
 }
+
 .navbar {
-    /* background: rgba(255, 255, 255, 0.34);
-    border-radius: 8px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(6.8px);
-    -webkit-backdrop-filter: blur(6.8px);
-    border: 1px solid rgba(255, 255, 255, 0.3); */
     display: flex;
     justify-content: space-between;
     text-decoration: none;
@@ -30,12 +31,20 @@ a:visited {
     padding: 10px 20px;
     font-size: 20px;
 }
-.navbar ul {
+
+.navbar-links {
     list-style: none;
     display: flex;
     align-items: center;
     gap: 20px;
 }
+
+.navbar-links span {
+    width: 2px;
+    height: 30px;
+    background-color: rgb(113, 113, 202);
+}
+
 .hero {
     background-image: url('../../public/images/orang_ronda.png');
     background-size: cover;
@@ -44,12 +53,59 @@ a:visited {
     color: white;
     display: flex;
     align-items: center;
+    text-align: center;
     justify-content: center;
     flex-direction: column;
 }
 
-main {
-    width: 100%;
+.navbar-toggle {
+    display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+     .navbar-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 1px 4px;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .navbar-links {
+        position: absolute;
+        border-radius: 3px;
+        top: 71px;
+        inset-inline: 0;
+        background-color: white;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.329);
+        padding: 20px;
+        list-style: none;
+        flex-direction: column;
+        align-items: start;
+        gap: 20px;
+        
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in-out;
+        pointer-events: none;
+    }
+
+    .active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+        
+    }
+
+    .navbar-links span {
+        width: 100%;
+        height: 2px;
+    }
 }
 
 .user-menu {
@@ -63,9 +119,9 @@ main {
     border-radius: 4px;
     background-color: rgb(113, 113, 202);
 }
+
 .logout-button {
     padding: 6px;
     border-radius: 4px;
     background-color: rgb(240, 60, 60);
 }
-
