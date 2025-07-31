@@ -1,5 +1,7 @@
-@vite('resources/css/app.css')
-<title>{{config('app.name')}} | Register</title>
+@extends('layouts.auth')
+@section('title', 'Register')
+@section('content')
+<div class="auth-container">
 <div class="auth-card">
     <h1>Daftar ke Sironda</h1>
     <form action="{{ route('register') }}" method="POST">
@@ -24,5 +26,10 @@
         <div class="register-link">
             <p>Sudah punya akun? <a href="{{ route('login') }}">Login di sini</a></p>
         </div>
+        <div class="register-link">
+            <p><-<a href="/">Kembali ke halaman Awal </a></p>
+        </div>
     </form>
 </div>
+</div>
+@endsection
