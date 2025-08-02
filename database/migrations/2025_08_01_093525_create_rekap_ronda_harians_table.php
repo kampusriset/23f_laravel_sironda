@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jadwals', function (Blueprint $table) {
+        Schema::create('rekap_ronda_harians', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('petugas_id');
+            $table->dateTime('tanggal_rekap');
+            $table->integer('total_petugas_hadir');
+            $table->integer('total_petugas_ijin');
+            $table->integer('total_petugas_alpha');
+            $table->text('isi_rekap');
             $table->timestamps();
         });
     }
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jadwals');
+        Schema::dropIfExists('rekap_ronda_harians');
     }
 };

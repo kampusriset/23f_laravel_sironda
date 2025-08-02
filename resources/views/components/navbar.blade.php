@@ -10,12 +10,14 @@
      </div>
      <div class="navbar-links">
          <a href="{{ url('/') }}">Home</a>
+         @if(Auth::check())
          <a href="{{ url('/absen') }}">Absen</a>
+         @endif
          <a href="{{ url('/contact') }}">Contact</a>
          <span></span>
          <div class="user-menu">
              @if (Auth::check())
-                 <span class="user-name">{{ Auth::user()->name }}</span>
+                 <p class="user-name">{{ Auth::user()->nama_lengkap }}</p>
                  <a href="{{ url('/profile') }}">Akun</a>
                  <form action="{{ route('logout') }}" method="POST">
                      @csrf

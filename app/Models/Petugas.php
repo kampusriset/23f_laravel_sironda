@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Petugas extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,9 +18,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'nama_lengkap',
+        'username',
         'password',
+        'slug',
     ];
 
     /**
@@ -41,4 +42,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function plotRonda()
+    {
+        return $this->hasMany(PlotRonda::class, 'petugas_id');
+    }
+    
+    public function laporanPetugas()
+    {
+        return $this->hasMany(PlotRonda::class, 'petugas_id');
+    }
+
+    public function rekapRondaHarian()
+    {
+        return $this->hasMany(PlotRonda::class, 'petugas_id');
+    }
 }

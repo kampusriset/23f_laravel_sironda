@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Petugas;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,77 +18,77 @@ class AuthController extends Controller
     {
         // Logic for handling login
         $request->validate([
-            'email' => 'required|email',
+            'username' => 'required',
             'password' => 'required|min:6',
         ]);
-        // Validate the request, authenticate the user, etc.
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        // Validate the request, authenticate the Petugas, etc.
+        if(Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             return redirect('/')->with('message', 'Berhasil Login');
         }
         return back()->withErrors([
-            'email' => 'email atau password salah'
+            'username' => 'username atau password salah'
         ]);
-        
     }
 
-    public function register()
+    public function register(Petugas $petugas)
     {
-        return view('pages.auth.register');
+        return view('pages.auth.register', compact('petugas'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:200|unique:users',
+            'username' => 'required|string|max:200|unique:petugas',
+            'nama_lengkap' => 'required|string|max:200',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        $data = $request->only('name', 'email', 'password');
+        $data = $request->only('nama_lengkap', 'username', 'password', 'slug');
         $data['password'] = bcrypt($request->password);
-        $baseSlug = Str::slug($request->name, '-');
+        $baseSlug = Str::slug($request->nama_lengkap, '-');
         $slug = $baseSlug;
         $count = 1;
 
-        while (User::where('slug', $slug)->exists()) {
+        while (Petugas::where('slug', $slug)->exists()) {
             $slug = $baseSlug . '-' . $count;
             $count++;
         }
 
         $data['slug'] = $slug;
-        User::create($data);
+        Petugas::create($data);
+
 
         return redirect('/login')->with('message', 'Akun berhasil dibuat, silahkan login');
     }
 
     public function editProfile($slug)
     {
-        $user = User::findOrFail($slug);
-        return view('pages.auth.edit', compact('user'));
+        $petugas = Petugas::findOrFail($slug);
+        return view('pages.auth.edit', compact('petugas'));
     }
 
     public function updateProfile(Request $request, $slug)
     {
-        $user = User::where(['slug', $slug])->first();
+        $petugas = Petugas::where(['slug', $slug])->first();
          $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:200|unique:users',
+            'nama_lengkap' => 'required|string|max:255',
+            'username' => 'required|string|max:200|unique:petugas',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        $data = $request->only('name', 'email', 'password', 'slug');
+        $data = $request->only('nama_lengkap', 'username', 'password', 'slug');
         $data['password'] = bcrypt($request->password);
-        $baseSlug = Str::slug($request->name, '-');
+        $baseSlug = Str::slug($request->nama_lengkap, '-');
         $slug = $baseSlug;
         $count = 1;
 
-        while (User::where('slug', $slug)->exists()) {
+        while (Petugas::where('slug', $slug)->exists()) {
             $slug = $baseSlug . '-' . $count;
             $count++;
         }
 
         $data['slug'] = $slug;
-        $user->update($data);
+        $petugas->update($data);
 
         return redirect('/edit-profile/'.$slug)->with('message', 'profil akun berhasil diupdate');
     }
@@ -99,7 +99,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('message', 'You have been logged out successfully.');
+        return redirect('/login')->with('message', 'Kamu Berhasil Logout');
     }
 
 }

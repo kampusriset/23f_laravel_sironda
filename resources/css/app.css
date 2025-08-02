@@ -121,7 +121,9 @@ a:visited {
 }
 
 .logout-button {
+    all: unset;
     padding: 6px;
     border-radius: 4px;
-    background-color: rgb(240, 60, 60);
+    background-color: rgb(240, 60, 60); 
+    cursor: pointer;
 }
