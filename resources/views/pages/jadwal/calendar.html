@@ -1,0 +1,170 @@
+<style>
+    .calendar-container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+}
+
+.day-cell {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.day-number {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.label {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    display: inline-block;
+    margin-top: 0.25rem;
+    text-align: center;
+}
+
+.label.day-off {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+.label.shift-1 {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+.label.shift-2 {
+    background-color: #e0e7ff;
+    color: #4338ca;
+}
+
+.label.special-shift {
+    background-color: #d1fae5;
+    color: #047857;
+}
+
+.highlight {
+    border: 2px solid #3b82f6;
+}
+.shift-label {
+    font-size: 0.8em;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.shift-a {
+    background-color: #e3f2fd;
+}
+
+.shift-b {
+    background-color: #e8f5e9;
+}
+
+.shift-c {
+    background-color: #fff3e0;
+}
+</style>
+    <h1>Jadwal Shift</h1>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <input id="date" type="month" value="2025-08" />
+            <span><strong>March - April 2022</strong></span>
+        </div>
+        <div class="calendar-grid">
+            <div class="day-cell"><strong>Sun</strong></div>
+            <div class="day-cell"><strong>Mon</strong></div>
+            <div class="day-cell"><strong>Tue</strong></div>
+            <div class="day-cell"><strong>Wed</strong></div>
+            <div class="day-cell"><strong>Thu</strong></div>
+            <div class="day-cell"><strong>Fri</strong></div>
+            <div class="day-cell"><strong>Sat</strong></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const getDaysInMonth = (year, month) => {
+        const date = new Date(year, month, 1);
+        const days = [];
+
+        while (date.getMonth() === month) {
+            days.push(new Date(date));
+            date.setDate(date.getDate() + 1);
+        }
+
+        return days;
+    }
+
+    const renderCalendar = (dateString) => {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = date.getMonth();
+
+        const shifts = {
+        '2025-08-01': 'Shift A',
+        '2025-08-02': 'Shift B',
+        '2025-08-03': 'Shift C',
+    };
+        
+        const headerCells = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+            .map(day => `<div class="day-cell"><strong>${day}</strong></div>`).join('');
+        
+        const firstDay = new Date(year, month, 1);
+        const startingDay = firstDay.getDay();
+        console.log(startingDay)
+        
+        let calendarHtml = headerCells;
+        for (let i = 0; i < startingDay; i++) {
+            calendarHtml += '<div class="day-cell"></div>';
+        }
+        
+        const days = getDaysInMonth(year, month);
+        days.forEach(day => {
+            const dateString = day.toISOString().split('T')[0];
+        const shift = shifts[dateString] || '';
+        const shiftClass = shift ? `shift-${shift.split(' ')[1].toLowerCase()}` : '';
+        
+        calendarHtml += `
+            <div class="day-cell ${shiftClass}">
+                <span class="day-number">${day.getDate()}</span>
+                <span class="shift-label">${shift}</span>
+            </div>`;
+        });
+        
+        document.querySelector('.calendar-grid').innerHTML = calendarHtml;
+        
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'];
+        document.querySelector('.calendar-header strong').textContent =
+            `${monthNames[month]} ${year}`;
+    }
+
+    const dateInput = document.querySelector('#date');
+    
+    renderCalendar(dateInput.value);
+    
+    dateInput.addEventListener('change', (event) => {
+        renderCalendar(event.target.value);
+    });
+});
+    </script>
+@endsection

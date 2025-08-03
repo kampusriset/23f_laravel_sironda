@@ -1,6 +1,6 @@
  <nav class="navbar">
      <a href="{{ url('/') }}" class="navbar-brand">
-         <img src="{{ asset('images/logo.png') }}" height="50" alt="Logo SiRonda" class="logo">
+         <img src="{{ asset('images/logo.png') }}" width="60" alt="Logo SiRonda" class="logo">
          <span class="app-name">{{ config('app.name', 'SiRonda') }}</span>
      </a>
      <div class="navbar-toggle">
@@ -10,15 +10,16 @@
      </div>
      <div class="navbar-links">
          <a href="{{ url('/') }}">Home</a>
+         <a href="{{ url('dashboard') }}">Dashboard</a>
          @if(Auth::check())
+         <a href="{{ url('/jadwal') }}">Jadwal</a>
          <a href="{{ url('/absen') }}">Absen</a>
          @endif
          <a href="{{ url('/contact') }}">Contact</a>
          <span></span>
          <div class="user-menu">
              @if (Auth::check())
-                 <p class="user-name">{{ Auth::user()->nama_lengkap }}</p>
-                 <a href="{{ url('/profile') }}">Akun</a>
+                 <a href="{{ url('/profile') }}">{{ Auth::user()->nama_lengkap }}</a>
                  <form action="{{ route('logout') }}" method="POST">
                      @csrf
                      <button type="submit" class="logout-button">Logout</button>

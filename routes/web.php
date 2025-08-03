@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\AbsenController;
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AbsenController;
+use App\Http\Controllers\JadwalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,13 @@ Route::post('register-store', [AuthController::class, 'store'])->name('register-
 
 Route::middleware(['auth'])->group((function(){
     
+    Route::get('dashboard', function () {
+        return view('pages.dashboard');
+    })->name('dashboard');
+    Route::get('jadwal', [JadwalController::class, 'index']);
+    Route::get('buat-jadwal', [JadwalController::class, 'create']);
+    Route::post('buat-jadwal', [JadwalController::class, 'store'])->name(('buat-jadwal'));
+    Route::get('absen', [AbsenController::class, 'index']);
     Route::get('edit-profile/{user:slug}', [AuthController::class, 'editProfile'])->name('edit-profile');
     Route::put('update-profile/{user:slug}', [AuthController::class, 'updateProfile'])->name('update-profile');
 

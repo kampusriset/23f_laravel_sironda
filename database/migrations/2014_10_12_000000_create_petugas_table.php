@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('slug', 50)->unique();
             $table->enum('is_active', ['0', '1'])->default('0');
             $table->enum('gender', ['M', 'F']);
+            $table->enum('role', ['admin', 'user'])->default('user');
             $table->rememberToken();
             $table->timestamps();
         });

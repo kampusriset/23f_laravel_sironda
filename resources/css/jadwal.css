@@ -1,0 +1,16 @@
+@import url('calendar.css');
+
+h1 {
+    font-size: x-large;
+    text-align: center;
+}
+
+.create-nav {
+    padding: 6px;
+    background-color: #4f46e5;
+    border-radius: 4px;
+}
+
+.create-nav:hover {
+    background-color: #433cc7;
+}

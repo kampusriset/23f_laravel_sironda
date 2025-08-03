@@ -14,9 +14,13 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\Petugas::create([
+            'nama_lengkap' => 'admin',
+            'username' => 'admin1',
+            'slug' => 'admin1',
+            'password' => bcrypt('admin123'),
+            'is_active' => '1',
+            'role' => 'admin',
+        ]);
     }
 }

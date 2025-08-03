@@ -8,9 +8,14 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    @include('components.navbar')
-    <main>
-        @yield('content')
-    </main>
+    <div class="navigation">
+        @include('components.sidebar')
+        <main>
+            @include('components.navbarApp')
+            <div class="content">
+                @yield('content')
+            </div>
+        </main>
+    </div>
 </body>
 </html>

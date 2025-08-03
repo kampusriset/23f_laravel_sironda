@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.landing')
 @section('content')
 <div class="hero">
         <h1>Selamat Datang di SiRonda</h1>
