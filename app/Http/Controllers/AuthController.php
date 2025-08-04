@@ -70,7 +70,7 @@ class AuthController extends Controller
     public function updateProfile(Request $request, $slug)
     {
         $petugas = Petugas::where(['slug', $slug])->first();
-         $request->validate([
+        $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'username' => 'required|string|max:200|unique:petugas',
             'password' => 'required|string|min:6|confirmed',

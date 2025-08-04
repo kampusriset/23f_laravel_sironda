@@ -2,8 +2,8 @@
 @section('title', 'Jadwal')
 @section('content')
     <h1>Jadwal Shift</h1>
-    @if(Auth::user()->role == 'admin')
-    <a class="create-nav" style="color: white" href="{{ url('buat-jadwal') }}">Buat Jadwal untuk Petugas</a>
+    @if (Auth::user()->role == 'admin')
+        <a class="create-nav" style="color: white" href="{{ url('buat-jadwal') }}">Buat Jadwal untuk Petugas</a>
     @endif
     <div class="calendar-container">
         <div class="calendar-grid">
@@ -26,6 +26,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const dataJadwal = {!! json_encode($plotRonda) !!}
+            const isLoggedIn = @json(Auth::user()->role == 'admin');
             const days = document.querySelectorAll('.day-cell');
             const petugasList = document.querySelector('.petugas-list');
             const overlay = document.querySelector('.overlay')
@@ -42,7 +43,6 @@
                     eve.preventDefault();
                     petugasList.innerHTML = '';
 
-
                     overlay.classList.add('overlay-active');
                     overlay.classList.remove('overlay');
                     containerPetugas.classList.remove('petugas-container');
@@ -54,8 +54,14 @@
 
                     petugasHariIni.forEach(jadwal => {
                         const div = document.createElement('div');
-                        div.textContent =
-                            `${jadwal.petugas.nama_lengkap} ${jadwal.is_leader === '1' ? '(Ketua)' : ''}`;
+                        div.classList.add('petugas-list-item')
+                        let html =
+                            `<p>${jadwal.petugas.nama_lengkap} ${jadwal.is_leader === '1' ? '(Ketua)' : ''}</p>`
+                        if (isLoggedIn) {
+                            html += `<a href='edit-jadwal/${jadwal.id}'>Ubah Jadwal</a>`;
+                        }
+                        div.innerHTML = html
+
                         petugasList.appendChild(div);
                     });
                 });
