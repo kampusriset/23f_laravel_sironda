@@ -23,7 +23,7 @@ class AuthController extends Controller
         ]);
         // Validate the request, authenticate the Petugas, etc.
         if(Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            return redirect('/')->with('message', 'Berhasil Login');
+            return redirect('/dashboard');
         }
         return back()->withErrors([
             'username' => 'username atau password salah'

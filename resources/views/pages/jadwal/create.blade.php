@@ -2,6 +2,7 @@
 @section('title', 'Buat Jadwal')
 @section('content')
 <h1>Buat Jadwal</h1>
+<a class="create-nav" style="color: white" href="{{ url('jadwal') }}">Kembali ke Halaman Jadwal</a>
 <form action="{{ route('buat-jadwal') }}" method="POST">
     @csrf
     <label for="">Pilih Petugas</label>
@@ -27,4 +28,5 @@
     <input type="checkbox" name="isActive" id="active" value="1">
     <button type="submit">Simpan</button>
 </form>
+
 @endsection
