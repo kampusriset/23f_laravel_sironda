@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('petugas_id');
             $table->dateTime('tanggal_lapor');
-            
             $table->text('isi_laporan');
             $table->timestamps();
         });

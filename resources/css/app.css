@@ -1,5 +1,6 @@
 @import url('sideNavBar.css');
 @import url('jadwal.css');
+@import url('absen.css');
 
 .navigation {
     display: flex;

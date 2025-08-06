@@ -58,7 +58,7 @@
                         let html =
                             `<p>${jadwal.petugas.nama_lengkap} ${jadwal.is_leader === '1' ? '(Ketua)' : ''}</p>`
                         if (isLoggedIn) {
-                            html += `<a href='edit-jadwal/${jadwal.id}'>Ubah Jadwal</a>`;
+                            html += `<a href='edit-jadwal/${jadwal.id}'>✏️</a>`;
                         }
                         div.innerHTML = html
 

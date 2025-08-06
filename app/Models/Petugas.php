@@ -57,4 +57,9 @@ class Petugas extends Authenticatable
     {
         return $this->hasMany(PlotRonda::class, 'petugas_id');
     }
+   
+    public function absen()
+    {
+        return $this->hasMany(PlotRonda::class, 'petugas_id');
+    }
 }

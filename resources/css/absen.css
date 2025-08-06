@@ -1,24 +1,123 @@
 .container {
-    width: 100%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
-.container table {
-    width: 100%;
-    padding: 10px;
+.container-status {
+    padding: 20px;
+    width: fit-content;
+    display: flex;
+    gap: 8px;
+    border: 1px solid rgba(236, 236, 236, 0.993);
+    border-radius: 6px;
+    box-shadow: 12px 10px 45px -30px rgba(0, 0, 0, 0.63);
+}
+
+.status-active {
+    padding: 2px;
+    background-color: #d1f7e0;
+    color: #2e7d32;
+}
+
+.status-pending {
+    padding: 2px;
+    background-color: #f7ead1;
+    color: rgb(250, 143, 3);
+}
+
+.status-rejected {
+    padding: 2px;
+    background-color: #fdecea;
+    color: #c62828;
+}
+
+table {
     border-collapse: collapse;
-    border: 2px solid rgb(184, 184, 184);
-    margin-top: 20px;
+    width: 100%;
+    table-layout: fixed;
 }
 
-.container table th {
-    border: 2px solid rgb(131, 130, 130);
-    background-color: rgb(218, 218, 218);
-}
-.container table td {
+th,
+td {
     padding: 10px;
-    text-align: center;
-    border: 2px solid rgb(113, 113, 202);
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+.accepted {
+    background-color: #d1f7e0;
+    color: #2e7d32;
+    padding: 5px 10px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.refused {
+    background-color: #fdecea;
+    color: #c62828;
+    padding: 5px 10px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.icon {
+    font-size: 16px;
+}
+
+img.avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.edit-link {
+    text-decoration: none;
+}
+
+.edit-link:hover {
+    text-decoration: underline;
+}
+
+:root {
+    --primary-color: #000;
+}
+
+.signature-pad-form {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.signature-pad {
+    cursor: url(pen.png) 1 26, pointer;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+}
+
+.clear-button {
+    color: var(--primary-color);
+}
+
+.submit-button {
+    width: 100%;
+    background-color: var(--primary-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+@media (pointer: coarse) {
+    body {
+        overflow: hidden;
+        /* Needed to prevent the vertical scroll on touch devices */
+    }
 }

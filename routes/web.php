@@ -35,11 +35,12 @@ Route::middleware(['auth'])->group((function(){
     Route::post('buat-jadwal', [JadwalController::class, 'store'])->name(('buat-jadwal'));
     Route::get('edit-jadwal/{jadwal}', [JadwalController::class, 'edit']);
     Route::put('update-jadwal/{jadwal}', [JadwalController::class, 'update'])->name(('update-jadwal'));
-    Route::get('absen', [AbsenController::class, 'index']);
     Route::get('edit-profile/{user:slug}', [AuthController::class, 'editProfile'])->name('edit-profile');
     Route::put('update-profile/{user:slug}', [AuthController::class, 'updateProfile'])->name('update-profile');
-
-    // Route::get('/absen', [AbsenController::class, 'index']);
+    
+    Route::get('absen', [AbsenController::class, 'index']);
+    Route::get('buat-absen', [AbsenController::class, 'create']);
+    Route::post('buat-absen', [AbsenController::class, 'create'])->name('buat-absen');
     
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 }));
