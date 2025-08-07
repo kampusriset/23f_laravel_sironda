@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group((function(){
     
     Route::get('absen', [AbsenController::class, 'index']);
     Route::get('buat-absen', [AbsenController::class, 'create']);
-    Route::post('buat-absen', [AbsenController::class, 'create'])->name('buat-absen');
+    Route::post('buat-absen', [AbsenController::class, 'store'])->name('buat-absen');
     
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 }));
