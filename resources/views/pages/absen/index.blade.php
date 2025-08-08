@@ -28,7 +28,7 @@
 
         @foreach (Auth::user()->plotRonda as $jadwal)
             @if ($jadwal->is_leader == '1' && $jadwal->nama_hari == $dayName && !$hasAbsensiToday)
-                <a class="create-nav" style="color: white; background-color: green; padding: 8px 12px; border-radius: 6px;" href="{{ url('buat-absen') }}">Lakukan Absensi Masuk</a>
+                <a class="create-nav" href="{{ url('buat-absen') }}">Lakukan Absensi Masuk</a>
             @endif
         @endforeach
     </div>

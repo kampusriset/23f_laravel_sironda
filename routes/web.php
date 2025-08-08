@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\LaporanPetugasController;
+use App\Models\LaporanPetugas;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,8 @@ Route::middleware(['auth'])->group((function(){
     Route::get('absen', [AbsenController::class, 'index']);
     Route::get('buat-absen', [AbsenController::class, 'create']);
     Route::post('buat-absen', [AbsenController::class, 'store'])->name('buat-absen');
+    
+    Route::get('laporan', [LaporanPetugasController::class, 'index']);
     
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 }));
