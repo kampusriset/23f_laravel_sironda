@@ -1,6 +1,7 @@
 @import url('sideNavBar.css');
 @import url('jadwal.css');
 @import url('absen.css');
+@import url('laporan.css');
 
 .navigation {
     display: flex;

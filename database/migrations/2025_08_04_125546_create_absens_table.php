@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('petugas_id');
             $table->dateTime('tanggal_kehadiran');
             $table->time('waktu_kehadiran');
-            $table->string('tanda_tangan');
+            $table->string('tanda_tangan')->nullable();
             $table->timestamps();
         });
     }

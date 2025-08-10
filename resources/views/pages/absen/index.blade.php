@@ -8,27 +8,35 @@
         </div>
         <div style="display: flex; flex-direction: column; gap: 4px;">
             <p>Nama : {{ Auth::user()->nama_lengkap }}</p>
-            <p>Status : <span class="status-active" id="status">
-                    @php
-                        $todayFormatted = \Carbon\Carbon::now()->translatedFormat('j F Y');
-                    @endphp
-                    Berhasil Absensi Untuk Tanggal {{ $todayFormatted }}
-                </span>
+            @php
+                $today = now()->format('Y-m-d');
+                $hasAbsensiToday = $absensi->contains(function ($item) use ($today) {
+                    return \Carbon\Carbon::parse($item->tanggal_kehadiran)->format('Y-m-d') === $today;
+                });
+                $todayFormatted = \Carbon\Carbon::now()->translatedFormat('j F Y');
+            @endphp
+            <p>Status :
+                @if ($hasAbsensiToday)
+                    <span class="status-active" id="status">
+                        Berhasil Absensi Untuk Tanggal {{ $todayFormatted }}
+                    </span>
+                @else
+                    <span class="status-rejected" id="status">
+                        Belum melakukan Absen
+                    </span>
+                @endif
             </p>
         </div>
     </div>
     <div>
-         @php
+        @php
             $today = now()->format('Y-m-d');
             $dayName = strtolower(now()->translatedFormat('l'));
-            $hasAbsensiToday = $absensi->contains(function ($item) use ($today) {
-                return \Carbon\Carbon::parse($item->tanggal_kehadiran)->format('Y-m-d') === $today;
-            });
         @endphp
 
         @foreach (Auth::user()->plotRonda as $jadwal)
             @if ($jadwal->is_leader == '1' && $jadwal->nama_hari == $dayName && !$hasAbsensiToday)
-                <a class="create-nav" href="{{ url('buat-absen') }}">Lakukan Absensi Masuk</a>
+                <a class="create-nav" style="color: white" href="{{ url('buat-absen') }}">Lakukan Absensi Masuk</a>
             @endif
         @endforeach
     </div>
@@ -40,25 +48,29 @@
                     <tr>
                         <th>Tanggal Absensi</th>
                         <th>Status Kehadiran</th>
-                        <th>Edit</th>
+                        @if(Auth::user()->role == 'admin')
+                            <th>Edit</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($absensi as $absen)
-                    <tr>
-                        <td>{{ $absen->tanggal_kehadiran }}</td>
-                        <td><span class="accepted">Hadir</span></td>
-                        <td><a class="edit-link" href="#">✏️</a></td>
-                    </tr>
+                    @foreach ($absensi as $absen)
+                        <tr>
+                            <td>{{ $absen->tanggal_kehadiran }}</td>
+                            <td><span class="accepted">Hadir</span></td>
+                            @if(Auth::user()->role == 'admin')
+                            <td><a class="edit-link" href="#">✏️</a></td>
+                            @endif
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-    const dataAbsen = {!! json_encode($absensi) !!}
-    console.log(dataAbsen)
-    })
-   </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dataAbsen = {!! json_encode($absensi) !!}
+            console.log(dataAbsen)
+        })
+    </script>
 @endsection

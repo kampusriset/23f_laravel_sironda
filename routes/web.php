@@ -45,6 +45,8 @@ Route::middleware(['auth'])->group((function(){
     Route::post('buat-absen', [AbsenController::class, 'store'])->name('buat-absen');
     
     Route::get('laporan', [LaporanPetugasController::class, 'index']);
+    Route::get('laporan-petugas', [LaporanPetugasController::class, 'create']);
+    Route::post('laporan-petugas', [LaporanPetugasController::class, 'store'])->name('laporan-petugas');
     
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 }));

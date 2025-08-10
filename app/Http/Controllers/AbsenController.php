@@ -46,6 +46,6 @@ class AbsenController extends Controller
 
         Absen::create($data);
 
-        return back()->with('success', 'Tanda tangan berhasil disimpan!');
+        return back()->with('success', 'Berhasil melakukan absensi');
     }
 }

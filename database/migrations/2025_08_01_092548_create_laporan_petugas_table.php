@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('laporan_petugas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('petugas_id');
-            $table->dateTime('tanggal_lapor');
+            $table->date('tanggal_lapor');
             $table->text('isi_laporan');
             $table->timestamps();
         });
