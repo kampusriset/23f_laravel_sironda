@@ -30,8 +30,8 @@ class JadwalController extends Controller
         PlotRonda::create([
             'petugas_id' => $request->petugas_id,
             'nama_hari' => $request->nama_hari,
-            'is_active' => $request->is_active,
-            'is_leader' => $request->is_leader,
+            'is_active' => $request->is_active ? $request->is_active : '0',
+            'is_leader' => $request->is_leader ? $request->is_leader : '0',
         ]);
 
         return redirect()->route('buat-jadwal')->with('success', 'Jadwal berhasil dibuat');

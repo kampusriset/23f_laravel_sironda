@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\LaporanPetugasController;
+use App\Http\Controllers\RekapController;
 use App\Models\LaporanPetugas;
 
 /*
@@ -48,5 +49,7 @@ Route::middleware(['auth'])->group((function(){
     Route::get('laporan-petugas', [LaporanPetugasController::class, 'create']);
     Route::post('laporan-petugas', [LaporanPetugasController::class, 'store'])->name('laporan-petugas');
     
+    Route::get('rekap-petugas', [RekapController::class, 'create']);
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 }));
