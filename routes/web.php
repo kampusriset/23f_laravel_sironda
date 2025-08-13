@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group((function(){
     Route::post('laporan-petugas', [LaporanPetugasController::class, 'store'])->name('laporan-petugas');
     
     Route::get('rekap-petugas', [RekapController::class, 'create']);
+    Route::post('rekap-petugas', [RekapController::class, 'store'])->name('rekap-petugas');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 }));

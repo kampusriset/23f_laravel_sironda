@@ -1,8 +1,8 @@
 <div class="sidebar">
-        <a href="{{ url('dashboard') }}" class="navbar-brand">
-            <img src="{{ asset('images/logo.png') }}" width="60" alt="Logo SiRonda" class="logo">
-            <span class="app-name">{{ config('app.name', 'SiRonda') }}</span>
-        </a>
+        <div class="logo">
+                <div class="logo-icon">🛡️</div>
+                SiRonda
+        </div>
         <div class="sidebar-links">
             <a href="{{ url('dashboard') }}">Dashboard</a>
             <a href="{{ url('absen') }}">Absen</a>

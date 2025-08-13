@@ -23,7 +23,11 @@
             
             <div class="input-items">
                 <label for="tanggal_kehadiran">Waktu Kehadiran</label>
-                <input type="text" name="tanggal_kehadiran" value="{{ now()->format('Y-m-d H:i') }}" readonly>
+                <input type="text" name="tanggal_kehadiran" value="{{ now()->format('Y-m-d') }}" readonly>
+            </div>
+            <div class="input-items">
+                <label for="waktu_kehadiran">Waktu Kehadiran</label>
+                <input type="text" name="waktu_kehadiran" value="{{ now()->format('H:i') }}" readonly>
             </div>
 
             <div class="input-items">

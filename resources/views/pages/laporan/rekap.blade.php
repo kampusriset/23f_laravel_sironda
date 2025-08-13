@@ -23,7 +23,7 @@
             </div>
         @endif
 
-        <form action="{{ route('laporan-petugas') }}" method="POST">
+        <form action="{{ route('rekap-petugas') }}" method="POST">
             @csrf
             <input type="hidden" name="petugas_id" value="{{ Auth::user()->id }}">
             <div class="laporan-group">
@@ -34,15 +34,20 @@
 
             <div class="laporan-group">
                 <label for="tanggal_laporan" class="laporan-label">Tanggal Laporan</label>
-                <input type="text" name="tanggal_lapor" value="{{ now()->format('d-m-Y') }}" readonly
+                <input type="text" name="tanggal_rekap" value="{{ now()->format('d-m-Y') }}" readonly
                     class="laporan-input">
             </div>
             
-            @foreach($petugases as $petugas)
             <div class="laporan-group">
-                <input type="checkbox" name="" id="">
+                <p>Petugas yang hadir</p>
+            </div>
+            @foreach($petugases as $petugas)
+            @if($petugas->nama_lengkap != Auth::user()->nama_lengkap)
+            <div class="laporan-group" style="display: flex; align-items: center; gap: 4px;">
+                <input type="checkbox" name="petugas_hadir[]" id="" value="{{ $petugas->id }}">
                 <label for="rekap_kehadiran" class="laporan-label">{{ $petugas->nama_lengkap }}</label>
             </div>
+            @endif
             @endforeach
 
             <div class="laporan-group">

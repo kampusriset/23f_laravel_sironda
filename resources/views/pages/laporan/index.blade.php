@@ -9,21 +9,18 @@
             $dayName = strtolower(now()->translatedFormat('l'));
         @endphp
 
-        {{-- @foreach (Auth::user()->plotRonda as $jadwal) --}}
-            {{-- @if ($jadwal->nama_hari == $dayName) --}}
+        @foreach (Auth::user()->plotRonda as $jadwal)
+            @if ($jadwal->nama_hari == $dayName)
                 <div class="ronda-links">
                     <a style="color: white" href="{{ url('laporan-petugas') }}" class="ronda-link">Laporan Ronda</a>
                     <a href="{{ url('rekap-petugas') }}" style="color: white" class="ronda-link">Rekap Ronda</a>
                 </div>
-            {{-- @else --}}
+            @else
                 <p class="ronda-warning">
                     Anda belum bisa melaporkan kejadian malam karena bukan jadwal anda
                 </p>
-            {{-- @endif --}}
-        {{-- @endforeach --}}
-        <p class="ronda-warning">
-            Anda belum bisa melaporkan kejadian malam karena bukan jadwal anda
-        </p>
+            @endif
+        @endforeach
         <div>
             <h1>Riwayat Laporan</h1>
             <div class="container">

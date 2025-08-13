@@ -26,11 +26,13 @@ class AbsenController extends Controller
         $request->validate([
             'petugas_id' => 'required',
             'tanggal_kehadiran' => 'required',
+            'waktu_kehadiran' => 'required',
             'tanda_tangan' => 'required',
         ]);
 
-        $data = $request->only('petugas_id', 'tanggal_kehadiran', 'tanda_tangan');
+        $data = $request->only('petugas_id', 'waktu_kehadiran', 'tanggal_kehadiran', 'tanda_tangan');
         $data['tanggal_kehadiran'] =  Carbon::parse($request->tanggal_kehadiran);
+        $data['waktu_kehadiran'] =  Carbon::parse($request->waktu_kehadiran);
 
         $base64Image = $request->tanda_tangan;
 
